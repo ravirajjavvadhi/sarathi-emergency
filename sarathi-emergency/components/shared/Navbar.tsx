@@ -51,7 +51,14 @@ export const Navbar = () => {
             <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center overflow-hidden">
               <Image src="/favicon.ico" alt="Sarathi logo" width={34} height={34} />
             </div>
-            <span className="hidden sm:inline text-xl whitespace-nowrap">SARATHI</span>
+            <div className="leading-none">
+              <span className="block text-sm sm:text-xl font-black tracking-[0.16em] bg-gradient-to-r from-orange-300 via-red-400 to-amber-200 bg-clip-text text-transparent whitespace-nowrap">
+                SARATHI
+              </span>
+              <span className="block mt-1 text-[9px] sm:text-[10px] font-semibold tracking-[0.24em] text-emerald-300/90 whitespace-nowrap">
+                EMERGENCY
+              </span>
+            </div>
           </Link>
 
           <div className="hidden 2xl:flex items-center justify-start gap-6 min-w-0 pl-2">
