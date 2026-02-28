@@ -1,7 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useMemo, useState } from 'react';
-import { AlertTriangle, Loader2, MapPin, Phone } from 'lucide-react';
+import { AlertTriangle, BellRing, Loader2, MapPin, Phone } from 'lucide-react';
 import { useLocation } from '@/hooks/useLocation';
 import { useI18n } from '@/components/shared/LanguageProvider';
 
@@ -68,6 +68,8 @@ export default function PublicSosPage() {
   const [result, setResult] = useState<SosResponse | null>(null);
   const [trackPhone, setTrackPhone] = useState('');
   const [trackResult, setTrackResult] = useState<TrackResponse | null>(null);
+  const [quickActionEnabled, setQuickActionEnabled] = useState(false);
+  const [quickActionError, setQuickActionError] = useState<string | null>(null);
 
   useEffect(() => {
     const savedPhone = localStorage.getItem(DEFAULT_PHONE_KEY);
@@ -100,6 +102,49 @@ export default function PublicSosPage() {
     () => phone.trim().length >= 10 && Boolean(location) && !loading,
     [phone, location, loading]
   );
+
+  async function enableQuickSosAction() {
+    setQuickActionError(null);
+
+    if (typeof window === 'undefined' || !('Notification' in window)) {
+      setQuickActionError('Notifications are not supported on this browser.');
+      return;
+    }
+
+    if (!('serviceWorker' in navigator)) {
+      setQuickActionError('Service worker is not available on this browser.');
+      return;
+    }
+
+    try {
+      const permission =
+        Notification.permission === 'granted'
+          ? 'granted'
+          : await Notification.requestPermission();
+
+      if (permission !== 'granted') {
+        setQuickActionError('Notification permission is required for quick SOS actions.');
+        return;
+      }
+
+      const registration = await navigator.serviceWorker.ready;
+      await registration.showNotification('SARATHI Quick SOS', {
+        body: 'Tap notification action to open SOS quickly from lock screen.',
+        icon: '/favicon.ico',
+        badge: '/favicon.ico',
+        requireInteraction: true,
+        data: { url: '/public-sos?quick=1' },
+        actions: [
+          { action: 'open-sos', title: 'Open SOS' },
+          { action: 'call-help', title: 'Open Call Help' },
+        ],
+      } as NotificationOptions);
+
+      setQuickActionEnabled(true);
+    } catch {
+      setQuickActionError('Failed to enable quick SOS action.');
+    }
+  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -237,6 +282,23 @@ export default function PublicSosPage() {
               )}
             </button>
           </form>
+
+          <div className="mt-4 rounded-lg border border-amber-500/40 bg-amber-900/10 p-3">
+            <button
+              type="button"
+              onClick={enableQuickSosAction}
+              className="w-full rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 transition-colors inline-flex items-center justify-center gap-2"
+            >
+              <BellRing className="h-4 w-4" />
+              {quickActionEnabled ? 'Quick SOS Action Enabled' : 'Enable Lock-Screen Quick SOS'}
+            </button>
+            <p className="mt-2 text-xs text-amber-100/90">
+              Best support is on Android Chrome after installing as app (PWA).
+            </p>
+            {quickActionError && (
+              <p className="mt-2 text-xs text-red-200">{quickActionError}</p>
+            )}
+          </div>
 
           {(error || locationError) && (
             <div className="mt-4 rounded-lg border border-red-600/50 bg-red-950/30 px-3 py-2 text-sm text-red-200">

@@ -30,5 +30,33 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any maskable",
       },
     ],
+    shortcuts: [
+      {
+        name: "Emergency SOS",
+        short_name: "SOS",
+        description: "Open SOS screen instantly",
+        url: "/public-sos?quick=1",
+        icons: [
+          {
+            src: "/favicon.ico",
+            sizes: "96x96",
+            type: "image/x-icon",
+          },
+        ],
+      },
+      {
+        name: "Driver Login",
+        short_name: "Driver",
+        description: "Open driver login",
+        url: "/driver-login",
+        icons: [
+          {
+            src: "/favicon.ico",
+            sizes: "96x96",
+            type: "image/x-icon",
+          },
+        ],
+      },
+    ],
   };
 }
