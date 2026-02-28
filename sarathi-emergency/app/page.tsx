@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import {
-  AlertTriangle,
   Phone,
   Shield,
   Zap,
@@ -96,46 +96,54 @@ export default function Home() {
 
       <div className="relative z-10">
         {/* Navigation Bar */}
-        <nav className="flex justify-between items-center px-6 md:px-12 py-6 backdrop-blur-md border-b border-slate-800/50">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 group"
-          >
+        <nav className="px-6 md:px-12 py-5 backdrop-blur-md border-b border-slate-800/50">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="w-10 h-10 rounded-lg bg-gradient-to-r from-red-600 to-orange-600 flex items-center justify-center"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 group"
             >
-              <AlertTriangle size={24} className="text-white" />
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="w-11 h-11 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 flex items-center justify-center overflow-hidden shadow-lg shadow-red-900/30"
+              >
+                <Image src="/favicon.ico" alt="Sarathi logo" width={30} height={30} />
+              </motion.div>
+              <div className="leading-none">
+                <span className="block text-xl sm:text-2xl font-black tracking-[0.16em] bg-gradient-to-r from-orange-300 via-red-400 to-amber-200 bg-clip-text text-transparent">
+                  SARATHI
+                </span>
+                <span className="block mt-1 text-[10px] sm:text-xs font-semibold tracking-[0.28em] text-emerald-300/90">
+                  EMERGENCY
+                </span>
+              </div>
             </motion.div>
-            <span className="text-2xl font-bold gradient-text hidden sm:inline">SARATHI</span>
-            <span className="text-xs font-semibold text-emerald-400 ml-2">EMERGENCY</span>
-          </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex gap-3 flex-wrap justify-end"
-          >
-            <Link href="/driver-login">
-              <button className="btn-emergency text-sm md:text-base">
-                {t('nav.driverLogin')}
-              </button>
-            </Link>
-            <Link href="/public-sos">
-              <button className="btn-secondary text-sm md:text-base">
-                {t('nav.sos')}
-              </button>
-            </Link>
-            <Link href="/hospital-login">
-              <button className="btn-secondary text-sm md:text-base">
-                {t('nav.hospitalLogin')}
-              </button>
-            </Link>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full md:w-auto md:flex md:gap-3"
+            >
+              <Link href="/driver-login" className="w-full md:w-auto">
+                <button className="w-full md:w-auto rounded-xl px-4 py-2.5 text-sm md:text-base font-bold bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white shadow-md shadow-red-900/30 transition">
+                  {t('nav.driverLogin')}
+                </button>
+              </Link>
+              <Link href="/public-sos" className="w-full md:w-auto">
+                <button className="w-full md:w-auto rounded-xl px-4 py-2.5 text-sm md:text-base font-bold bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 text-white shadow-md shadow-rose-900/30 transition">
+                  {t('nav.sos')}
+                </button>
+              </Link>
+              <Link href="/hospital-login" className="w-full md:w-auto">
+                <button className="w-full md:w-auto rounded-xl px-4 py-2.5 text-sm md:text-base font-bold bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white shadow-md shadow-emerald-900/30 transition">
+                  {t('nav.hospitalLogin')}
+                </button>
+              </Link>
+            </motion.div>
+          </div>
         </nav>
 
         {/* Hero Section */}
@@ -426,7 +434,7 @@ export default function Home() {
         <footer className="border-t border-slate-800/50 backdrop-blur-md mt-20 py-8 px-6 md:px-12">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <AlertTriangle size={20} className="text-red-500" />
+              <Image src="/favicon.ico" alt="Sarathi logo" width={20} height={20} />
               <span className="font-bold gradient-text">SARATHI Emergency</span>
             </div>
             <div className="flex gap-6 text-sm text-slate-400">
