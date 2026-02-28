@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/shared";
 import { LanguageProvider } from "@/components/shared/LanguageProvider";
 import { SpaceBackdrop } from "@/components/shared/SpaceBackdrop";
+import { InstallAppButton } from "@/components/pwa/InstallAppButton";
 
 const interSans = Inter({
   variable: "--font-geist-sans",
@@ -18,7 +19,13 @@ const robotoMono = Roboto_Mono({
 export const metadata: Metadata = {
   title: "SARATHI - Emergency Navigation System",
   description: "AI-powered emergency response platform for ambulance, police, and fire services",
+  manifest: "/manifest.webmanifest",
   viewport: "width=device-width, initial-scale=1",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "SARATHI",
+  },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
@@ -48,6 +55,7 @@ export default function RootLayout({
           <div className="relative z-10">
             <Navbar />
             {children}
+            <InstallAppButton />
           </div>
         </LanguageProvider>
       </body>
