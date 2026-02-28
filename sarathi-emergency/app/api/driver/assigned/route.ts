@@ -31,13 +31,13 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Driver not found.' }, { status: 404 });
     }
 
-    const trip = await EmergencyTrip.findOne({
+    const trip = (await EmergencyTrip.findOne({
       driverId: driver._id,
       status: { $in: ['assigned', 'accepted', 'in-progress'] },
     })
       .sort({ createdAt: -1 })
       .populate('userId', 'fullName phone')
-      .lean();
+      .lean()) as any;
 
     if (!trip) {
       return NextResponse.json({ success: true, trip: null });

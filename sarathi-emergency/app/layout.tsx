@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/shared";
 import { LanguageProvider } from "@/components/shared/LanguageProvider";
 import { SpaceBackdrop } from "@/components/shared/SpaceBackdrop";
 
-const geistSans = Geist({
+const interSans = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const robotoMono = Roboto_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -39,7 +39,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#991b1b" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 text-white overflow-x-hidden`}
+        className={`${interSans.variable} ${robotoMono.variable} antialiased bg-gray-950 text-white overflow-x-hidden`}
       >
         <LanguageProvider>
           <SpaceBackdrop />
