@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: "AI-powered emergency response platform for ambulance, police, and fire services",
   viewport: "width=device-width, initial-scale=1",
   icons: {
-    icon: '/logo.png',
+    icon: '/favico.ico',
   },
 };
 
