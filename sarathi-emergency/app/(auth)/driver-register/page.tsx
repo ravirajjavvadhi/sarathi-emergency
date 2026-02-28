@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Lock, User, Mail, Phone, AlertCircle, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { GlowButton } from '@/components/shared';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -149,8 +150,8 @@ export default function DriverRegisterPage() {
       <div className="w-full max-w-2xl">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full mb-4">
-            <span className="text-white text-3xl font-black">S</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-full mb-4 overflow-hidden">
+            <Image src="/favicon.ico" alt="Sarathi logo" width={44} height={44} />
           </div>
           <h1 className="text-3xl font-black text-white mb-2">SARATHI</h1>
           <p className="text-green-300">Driver Registration Portal</p>

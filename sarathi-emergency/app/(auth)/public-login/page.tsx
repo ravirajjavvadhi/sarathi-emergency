@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Lock, User, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { GlowButton } from '@/components/shared';
 
 export default function PublicLoginPage() {
@@ -73,8 +74,8 @@ export default function PublicLoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-full mb-4">
-            <span className="text-white text-3xl font-black">S</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-full mb-4 overflow-hidden">
+            <Image src="/favicon.ico" alt="Sarathi logo" width={44} height={44} />
           </div>
           <h1 className="text-3xl font-black text-white mb-2">SARATHI</h1>
           <p className="text-red-300">Emergency SOS Login</p>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, LogOut } from 'lucide-react';
 import { useState } from 'react';
 import { AppLanguage, useI18n } from './LanguageProvider';
@@ -47,8 +48,8 @@ export const Navbar = () => {
             href="/"
             className="flex items-center gap-3 font-black text-white hover:text-orange-400 transition shrink-0 min-w-fit"
           >
-            <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center">
-              <span className="text-black text-base font-black">S</span>
+            <div className="w-11 h-11 bg-white rounded-full flex items-center justify-center overflow-hidden">
+              <Image src="/favicon.ico" alt="Sarathi logo" width={34} height={34} />
             </div>
             <span className="hidden sm:inline text-xl whitespace-nowrap">SARATHI</span>
           </Link>
